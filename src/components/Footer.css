@@ -179,16 +179,23 @@
     font-size: 1.5rem;
   }
 }
-
 @media (max-width: 576px) {
+  .footer {
+    padding: 2.5rem 0 1rem;
+  }
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.2rem;
     text-align: center;
+    margin-bottom: 1.2rem;
   }
   .footer-links h3::after, .footer-services h3::after, .footer-contact h3::after {
     left: 50%;
     transform: translateX(-50%);
+  }
+  .footer-links h3, .footer-services h3, .footer-contact h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
   }
   .social-links {
     justify-content: center;
@@ -196,10 +203,14 @@
   .footer-contact-list li {
     justify-content: center;
     text-align: center;
+    font-size: 0.85rem;
   }
   .footer-bottom {
     flex-direction: column;
     text-align: center;
-    gap: 0.75rem;
+    gap: 0.4rem;
+    padding-top: 1.2rem;
+    font-size: 0.8rem;
   }
 }
+
