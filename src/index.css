@@ -31,12 +31,47 @@ body {
   line-height: 1.65;
   font-size: 1rem;
   font-weight: 400;
+  width: 100%;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  /* Hardware acceleration for smoother animations */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 1s ease-in-out;
+}
+
+.app-container.intro-loading {
+  opacity: 0;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.app-container.intro-ready {
+  opacity: 1;
+  height: auto;
+  min-height: 100vh;
+  overflow: visible;
+  pointer-events: auto;
+}
+
+.app-container > * {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+main {
+  width: 100%;
+  flex: 1;
 }
 
 h1 {

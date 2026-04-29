@@ -62,7 +62,7 @@ const MainSite = () => {
   return (
     <>
       {!introFinished && <Intro onComplete={handleIntroComplete} />}
-      <div className="app-container" style={{ opacity: introFinished ? 1 : 0, transition: 'opacity 1s ease-in-out', pointerEvents: introFinished ? 'auto' : 'none', height: introFinished ? 'auto' : '100vh', overflow: introFinished ? 'visible' : 'hidden' }}>
+      <div className={`app-container ${introFinished ? 'intro-ready' : 'intro-loading'}`}>
         <SEO />
         <Navbar />
         <main>

@@ -13,7 +13,7 @@ const Contact = () => {
   const [contactData, setContactData] = useState({
     phone: '+91 9043426461',
     whatsapp: '919043426461',
-    email: 'velmurugangrillworks@gmail.com',
+    email: 'sandhyaa.9193@gmail.com',
     address: 'Ulavar Santhai, Gandhiji Rd,\nSundarapuram, Podanur,\nCoimbatore – 641023'
   });
 
