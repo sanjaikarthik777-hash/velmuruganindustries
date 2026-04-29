@@ -112,8 +112,7 @@ const Gallery = () => {
   return (
     <section id="gallery" className="section gallery-section">
       {/* Decorative background elements */}
-      <div className="gallery-bg-glow gallery-bg-glow-1" />
-      <div className="gallery-bg-glow gallery-bg-glow-2" />
+
 
       <div className="container">
         {/* Section Header */}

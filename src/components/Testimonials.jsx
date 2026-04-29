@@ -64,7 +64,7 @@ const Testimonials = () => {
 
   return (
     <section id="testimonials" className="section testimonials-section">
-      <div className="bg-glow"></div>
+
       <div className="container">
         <div className="section-header-centered">
           <span className="section-subtitle">Real feedback from real clients</span>

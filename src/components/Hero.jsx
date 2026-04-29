@@ -48,47 +48,7 @@ const GrillStructure = ({ isMobile }) => {
   );
 };
 
-const Sparks = ({ isMobile }) => {
-  const ref = useRef();
-  const count = isMobile ? 60 : 300; // Significantly reduced for mobile
-  
-  const [positions, sizes] = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    const sizes = new Float32Array(count);
-    for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 15;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-      sizes[i] = Math.random() * (isMobile ? 1.5 : 2);
-    }
-    return [positions, sizes];
-  }, [count, isMobile]);
 
-  useFrame((state, delta) => {
-    if (!ref.current) return;
-    ref.current.rotation.y -= delta * 0.05;
-    ref.current.rotation.x -= delta * 0.02;
-    const pos = ref.current.geometry.attributes.position.array;
-    for (let i = 0; i < count; i++) {
-      pos[i * 3 + 1] += delta * (Math.random() * 0.5 + 0.1);
-      if (pos[i * 3 + 1] > 5) pos[i * 3 + 1] = -5;
-    }
-    ref.current.geometry.attributes.position.needsUpdate = true;
-  });
-
-  return (
-    <Points ref={ref} positions={positions}>
-      <PointMaterial
-        transparent
-        color="#FF6B00"
-        size={isMobile ? 0.1 : 0.05}
-        sizeAttenuation={true}
-        depthWrite={false}
-        blending={THREE.AdditiveBlending}
-      />
-    </Points>
-  );
-};
 
 const Hero = () => {
   const isMobile = useIsMobile();
@@ -126,11 +86,7 @@ const Hero = () => {
           <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffffff" />
           
           {/* Reduced light sources on mobile */}
-          {!isMobile && <pointLight position={[-5, -5, 5]} intensity={2} color="#FF6B00" distance={10} />}
-          <pointLight position={[5, 0, 2]} intensity={isMobile ? 1.5 : 1} color="#FF6B00" distance={8} />
-          
           <GrillStructure isMobile={isMobile} />
-          <Sparks isMobile={isMobile} />
           <Environment preset="night" />
         </Canvas>
       </div>

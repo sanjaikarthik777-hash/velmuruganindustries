@@ -49,7 +49,7 @@ const TiltCard = ({ service }) => {
         </div>
         <h3 className="card-title">{service.title}</h3>
         <p className="card-desc">{service.description}</p>
-        <div className="card-glow"></div>
+
       </div>
     </div>
   );

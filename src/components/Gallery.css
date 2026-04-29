@@ -10,38 +10,7 @@
   padding: 6rem 0 5rem;
 }
 
-/* ── Ambient Background Glows ── */
-.gallery-bg-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 0;
-}
 
-.gallery-bg-glow-1 {
-  width: 600px;
-  height: 600px;
-  background: var(--accent-orange);
-  top: -200px;
-  right: -150px;
-  animation: glowFloat 8s ease-in-out infinite alternate;
-}
-
-.gallery-bg-glow-2 {
-  width: 500px;
-  height: 500px;
-  background: #8b5cf6;
-  bottom: -180px;
-  left: -120px;
-  animation: glowFloat 10s ease-in-out 2s infinite alternate-reverse;
-}
-
-@keyframes glowFloat {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(30px, -20px) scale(1.15); }
-}
 
 /* ── Section Header ── */
 .gallery-hero-header {

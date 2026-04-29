@@ -4,6 +4,8 @@ import { db } from './firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaCalculator } from 'react-icons/fa';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 
 // Components
 import Navbar from './components/Navbar';
@@ -52,6 +54,25 @@ const MainSite = () => {
       } catch (err) { console.error(err); }
     };
     trackVisit();
+
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
   }, []);
 
   const handleIntroComplete = () => {
