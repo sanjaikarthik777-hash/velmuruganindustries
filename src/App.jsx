@@ -84,10 +84,22 @@ const MainSite = () => {
         <Footer />
       </div>
 
-      {/* Overlays and Floating elements outside main flow */}
-      <div style={{ opacity: introFinished ? 1 : 0, transition: 'opacity 0.5s ease' }}>
-        <QuoteGenerator />
-        <div className="action-hub">
+      {/* Overlays and Floating elements - Fixed to prevent layout shifts */}
+      <div className="overlay-layer" style={{ 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        width: '100%', 
+        height: '100%', 
+        pointerEvents: 'none', 
+        zIndex: 9999,
+        opacity: introFinished ? 1 : 0, 
+        transition: 'opacity 0.5s ease' 
+      }}>
+        <div style={{ pointerEvents: 'auto' }}>
+          <QuoteGenerator />
+        </div>
+        <div className="action-hub" style={{ pointerEvents: 'auto' }}>
           <motion.div 
             className="hub-pill-premium ai-quote-hub"
             whileHover={{ scale: 1.05, x: -5 }}

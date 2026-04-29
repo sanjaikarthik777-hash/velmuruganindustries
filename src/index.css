@@ -19,31 +19,34 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent-orange) var(--bg-primary);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-primary);
   background-color: var(--bg-primary);
   color: var(--text-main);
-  overflow-x: hidden;
   line-height: 1.65;
   font-size: 1rem;
   font-weight: 400;
-  width: 100%;
-  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
 #root {
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .app-container {
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   transition: opacity 1s ease-in-out;
@@ -51,7 +54,7 @@ body {
 
 .app-container.intro-loading {
   opacity: 0;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
   pointer-events: none;
 }
@@ -59,7 +62,7 @@ body {
 .app-container.intro-ready {
   opacity: 1;
   height: auto;
-  min-height: 100vh;
+  min-height: 100%;
   overflow: visible;
   pointer-events: auto;
 }
@@ -72,7 +75,8 @@ body {
 }
 
 main {
-  flex: 1;
+  flex: 1 0 auto;
+  width: 100%;
 }
 
 h1 {
