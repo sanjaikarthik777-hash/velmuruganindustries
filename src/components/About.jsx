@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { db } from '../firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
 import ownerImage from '../OWNER.jpeg';
+import useIsMobile from '../hooks/useIsMobile';
 import './About.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -68,6 +69,7 @@ const Badge3D = () => {
 };
 
 const About = () => {
+  const isMobile = useIsMobile();
   const textRef = useRef(null);
   const ownerRef = useRef(null);
   const [aboutText, setAboutText] = useState(
@@ -84,6 +86,12 @@ const About = () => {
   }, []);
 
   useEffect(() => {
+    // Only animate on desktop for performance
+    if (isMobile) {
+      gsap.set([textRef.current, ownerRef.current], { opacity: 1, y: 0, x: 0 });
+      return;
+    }
+
     gsap.fromTo(
       textRef.current,
       { y: 50, opacity: 0 },
@@ -112,7 +120,7 @@ const About = () => {
         },
       }
     );
-  }, []);
+  }, [isMobile]);
 
   return (
     <section id="about" className="section about-section">
@@ -121,7 +129,11 @@ const About = () => {
         <div className="about-content">
           
           <div className="about-badge-container">
-            <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
+            <Canvas 
+              camera={{ position: [0, 0, 6], fov: 45 }}
+              dpr={isMobile ? [1, 1.5] : [1, 2]}
+              gl={{ antialias: !isMobile, powerPreference: 'high-performance' }}
+            >
               <ambientLight intensity={0.5} />
               <directionalLight position={[10, 10, 5]} intensity={1} />
               <pointLight position={[-10, -10, -10]} intensity={0.5} />
@@ -137,7 +149,7 @@ const About = () => {
             
             <div className="owner-profile glass-panel" ref={ownerRef}>
               <div className="owner-image-placeholder">
-                <img src={ownerImage} alt="Sathish Kumar" />
+                <img src={ownerImage} alt="Sathish Kumar" loading="lazy" />
               </div>
               <div className="owner-info">
                 <h4>Sathish Kumar</h4>

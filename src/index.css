@@ -76,36 +76,93 @@ ul {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --section-padding: 3rem;
+  }
+  
+  html {
+    font-size: 14px; /* Reduced base font size for mobile */
+    scroll-padding-top: 70px;
+  }
+
   .container {
     padding: 0 1.25rem;
   }
   
   .section {
-    padding: 4rem 0;
+    padding: var(--section-padding) 0;
   }
   
   .section-title {
-    font-size: 2rem;
-    margin-bottom: 2.5rem;
-    letter-spacing: 2px;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1.5px;
+    text-wrap: balance;
   }
 
-  /* Prevent common mobile issues */
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.4rem; }
+
+  /* Prevent common mobile issues and improve performance */
   body {
     overflow-x: hidden;
     position: relative;
     width: 100%;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .btn {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    min-height: 44px; /* Tap target perfection */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Optimized Action Hub for Mobile */
+  .action-hub {
+    bottom: 20px;
+    right: 15px;
+    gap: 10px;
+  }
+
+  .hub-pill-premium {
+    padding: 6px 14px 6px 8px;
+    transform: scale(0.9);
+    transform-origin: right bottom;
+  }
+
+  .hub-symbol {
+    width: 48px;
+    height: 48px;
+    transform: scale(0.9);
+    transform-origin: right bottom;
   }
 }
 
 @media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+
   .section-title {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
   }
   
   .btn {
-    padding: 0.7rem 1.5rem;
-    font-size: 0.9rem;
+    padding: 0.65rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .container {
+    padding: 0 0.75rem;
   }
 }
 

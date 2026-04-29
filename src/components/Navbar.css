@@ -97,10 +97,23 @@
 
 @media (max-width: 992px) {
   .navbar {
-    padding: 1rem 0;
-    background-color: rgba(13, 13, 15, 0.9);
-    backdrop-filter: blur(10px);
+    padding: 0.8rem 0;
+    background-color: rgba(13, 13, 15, 0.95);
+    backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .logo-text {
+    font-size: 1.15rem;
   }
 
   .nav-links {
@@ -111,13 +124,13 @@
     max-width: 320px;
     height: 100vh;
     background-color: rgba(22, 22, 25, 0.98);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2.5rem;
+    gap: 2.2rem;
     transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    box-shadow: -15px 0 40px rgba(0, 0, 0, 0.7);
+    box-shadow: -15px 0 40px rgba(0, 0, 0, 0.8);
     border-left: 1px solid rgba(197, 160, 89, 0.2);
     z-index: 1000;
   }
@@ -129,7 +142,24 @@
   .mobile-toggle {
     display: block;
     z-index: 1001;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    color: var(--accent-orange);
     padding: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text .highlight {
+    display: none; /* Hide "Grill Works" on very small phones to prevent overflow */
+  }
+  
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+    gap: 8px;
+  }
+  
+  .logo a {
+    gap: 8px;
   }
 }

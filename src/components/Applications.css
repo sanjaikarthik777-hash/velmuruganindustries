@@ -74,3 +74,20 @@
 .highlight-card::before {
   background: var(--accent-orange);
 }
+@media (max-width: 768px) {
+  .applications-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .app-card {
+    padding: 2.2rem 1.5rem;
+  }
+  .app-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .app-icon {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+}

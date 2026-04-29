@@ -100,3 +100,34 @@
 .tilt-card:hover .card-glow {
   opacity: 1;
 }
+@media (max-width: 768px) {
+  .services-grid {
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  .tilt-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .card-icon {
+    width: 65px;
+    height: 65px;
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+  }
+
+  /* Simplify 3D effect on mobile for performance */
+  .tilt-card-wrapper {
+    transform: none !important;
+  }
+}

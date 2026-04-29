@@ -70,48 +70,51 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    padding-top: 100px;
+    padding-top: 120px;
     padding-bottom: 60px;
     height: auto;
     min-height: 100vh;
-    min-height: 100svh; /* Modern mobile viewport height */
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
   .hero-content {
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.25rem;
     text-align: center;
     width: 100%;
   }
 
   .hero-title {
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
     text-align: center;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1.2rem;
     width: 100%;
+    letter-spacing: -0.5px;
   }
 
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-align: center;
-    margin: 0 auto 2.5rem;
+    margin: 0 auto 2.2rem;
     width: 100%;
-    line-height: 1.5;
+    line-height: 1.6;
+    color: var(--text-steel);
   }
 
   .hero-cta {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
     width: 100%;
-    max-width: 320px;
+    max-width: 280px;
     margin: 0 auto;
   }
 
   .hero-cta .btn {
     width: 100%;
     justify-content: center;
-    padding: 1rem;
+    padding: 1.1rem;
+    font-size: 0.9rem;
   }
 }

@@ -4,9 +4,10 @@ import { Environment, Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import { db } from '../firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
+import useIsMobile from '../hooks/useIsMobile';
 import './Hero.css';
 
-const GrillStructure = () => {
+const GrillStructure = ({ isMobile }) => {
   const group = useRef();
 
   useFrame((state) => {
@@ -15,28 +16,31 @@ const GrillStructure = () => {
     group.current.rotation.x = Math.sin(t / 10) * 0.05;
   });
 
+  // Reduce complexity on mobile
+  const beamCount = isMobile ? 4 : 6;
+  const hBeamCount = isMobile ? 3 : 4;
+
   return (
     <group ref={group} position={[0, 0, -8]}>
-      {/* Abstract background metal beams */}
-      {[...Array(6)].map((_, i) => (
-        <mesh key={`beam-${i}`} position={[(i - 2.5) * 5, 0, 0]} rotation={[0, 0, 0.2]}>
+      {[...Array(beamCount)].map((_, i) => (
+        <mesh key={`beam-${i}`} position={[(i - (beamCount-1)/2) * 5, 0, 0]} rotation={[0, 0, 0.2]}>
           <boxGeometry args={[0.3, 40, 1]} />
           <meshStandardMaterial 
             color="#1E1E1E" 
             metalness={0.9} 
             roughness={0.4} 
-            envMapIntensity={1}
+            envMapIntensity={isMobile ? 0.5 : 1}
           />
         </mesh>
       ))}
-      {[...Array(4)].map((_, i) => (
-        <mesh key={`h-beam-${i}`} position={[0, (i - 1.5) * 7, -2]} rotation={[0, 0, 0.1]}>
+      {[...Array(hBeamCount)].map((_, i) => (
+        <mesh key={`h-beam-${i}`} position={[0, (i - (hBeamCount-1)/2) * 7, -2]} rotation={[0, 0, 0.1]}>
           <boxGeometry args={[40, 0.5, 1]} />
           <meshStandardMaterial 
             color="#2C2C2C" 
             metalness={0.8} 
             roughness={0.5} 
-            envMapIntensity={0.8}
+            envMapIntensity={isMobile ? 0.4 : 0.8}
           />
         </mesh>
       ))}
@@ -44,10 +48,9 @@ const GrillStructure = () => {
   );
 };
 
-const Sparks = () => {
+const Sparks = ({ isMobile }) => {
   const ref = useRef();
-  const isMobile = window.innerWidth < 768;
-  const count = isMobile ? 100 : 300;
+  const count = isMobile ? 60 : 300; // Significantly reduced for mobile
   
   const [positions, sizes] = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -56,18 +59,19 @@ const Sparks = () => {
       positions[i * 3] = (Math.random() - 0.5) * 15;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-      sizes[i] = Math.random() * 2;
+      sizes[i] = Math.random() * (isMobile ? 1.5 : 2);
     }
     return [positions, sizes];
-  }, [count]);
+  }, [count, isMobile]);
 
   useFrame((state, delta) => {
+    if (!ref.current) return;
     ref.current.rotation.y -= delta * 0.05;
     ref.current.rotation.x -= delta * 0.02;
-    const positions = ref.current.geometry.attributes.position.array;
+    const pos = ref.current.geometry.attributes.position.array;
     for (let i = 0; i < count; i++) {
-      positions[i * 3 + 1] += delta * (Math.random() * 0.5 + 0.1);
-      if (positions[i * 3 + 1] > 5) positions[i * 3 + 1] = -5;
+      pos[i * 3 + 1] += delta * (Math.random() * 0.5 + 0.1);
+      if (pos[i * 3 + 1] > 5) pos[i * 3 + 1] = -5;
     }
     ref.current.geometry.attributes.position.needsUpdate = true;
   });
@@ -77,7 +81,7 @@ const Sparks = () => {
       <PointMaterial
         transparent
         color="#FF6B00"
-        size={isMobile ? 0.08 : 0.05}
+        size={isMobile ? 0.1 : 0.05}
         sizeAttenuation={true}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
@@ -87,6 +91,7 @@ const Sparks = () => {
 };
 
 const Hero = () => {
+  const isMobile = useIsMobile();
   const [content, setContent] = useState({
     heroTitle: '10+ Years of Trusted',
     heroHighlight: 'Grill & Fabrication',
@@ -107,15 +112,25 @@ const Hero = () => {
   return (
     <section id="hero" className="hero-section">
       <div className="canvas-container">
-        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
+        <Canvas 
+          camera={{ position: [0, 0, 8], fov: 45 }}
+          dpr={isMobile ? [1, 1.5] : [1, 2]} // Cap pixel ratio on mobile
+          gl={{ 
+            powerPreference: 'high-performance',
+            antialias: !isMobile, // Disable antialiasing on mobile for better performance
+            alpha: false
+          }}
+        >
           <fog attach="fog" args={['#0D0D0F', 5, 20]} />
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1.5} color="#ffffff" />
-          <pointLight position={[-5, -5, 5]} intensity={2} color="#FF6B00" distance={10} />
-          <pointLight position={[5, 0, 2]} intensity={1} color="#FF6B00" distance={8} />
           
-          <GrillStructure />
-          <Sparks />
+          {/* Reduced light sources on mobile */}
+          {!isMobile && <pointLight position={[-5, -5, 5]} intensity={2} color="#FF6B00" distance={10} />}
+          <pointLight position={[5, 0, 2]} intensity={isMobile ? 1.5 : 1} color="#FF6B00" distance={8} />
+          
+          <GrillStructure isMobile={isMobile} />
+          <Sparks isMobile={isMobile} />
           <Environment preset="night" />
         </Canvas>
       </div>
