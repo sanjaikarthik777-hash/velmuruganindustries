@@ -247,6 +247,7 @@ const AdminLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [logHov, setLogHov] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -256,6 +257,11 @@ const AdminLayout = () => {
       console.error('Error signing out', error);
     }
   };
+
+  useEffect(() => {
+    // Close mobile menu on navigation
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navItems = [
     { path: '/admin/dashboard', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
@@ -281,19 +287,40 @@ const AdminLayout = () => {
     }}>
       <ThreeBg />
 
+      {/* ── Mobile Overlay ── */}
+      {isMobileMenuOpen && (
+        <div 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="admin-mobile-show"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.6)',
+            backdropFilter: 'blur(4px)',
+            zIndex: 45,
+            transition: 'opacity 0.3s ease'
+          }}
+        />
+      )}
+
       {/* ── Sidebar ── */}
-      <aside style={{
-        width: 260,
-        background: 'rgba(12,12,18,0.82)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        borderRight: '1px solid rgba(197,160,89,0.12)',
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative',
-        zIndex: 10,
-        boxShadow: '4px 0 40px rgba(0,0,0,0.5)'
-      }}>
+      <aside 
+        id="admin-sidebar"
+        className={isMobileMenuOpen ? 'mobile-open' : ''}
+        style={{
+          width: 260,
+          background: 'rgba(12,12,18,0.92)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+          borderRight: '1px solid rgba(197,160,89,0.12)',
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+          zIndex: 50,
+          boxShadow: '4px 0 40px rgba(0,0,0,0.5)',
+          transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+        }}
+      >
         {/* Brand */}
         <div style={{
           padding: '1.6rem 1.5rem 1.2rem',
@@ -323,6 +350,20 @@ const AdminLayout = () => {
               Control Panel
             </div>
           </div>
+          {/* Close button for mobile */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="admin-mobile-show"
+            style={{
+              marginLeft: 'auto',
+              background: 'transparent',
+              border: 'none',
+              color: '#94a3b8',
+              cursor: 'pointer'
+            }}
+          >
+            <ExternalLink size={20} style={{ transform: 'rotate(180deg)' }} />
+          </button>
         </div>
 
         {/* Owner Card */}
@@ -419,7 +460,7 @@ const AdminLayout = () => {
         <header style={{
           padding: '1rem 2rem',
           borderBottom: '1px solid rgba(197,160,89,0.1)',
-          background: 'rgba(10,10,15,0.7)',
+          background: 'rgba(10,10,15,0.85)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           position: 'sticky',
@@ -431,15 +472,33 @@ const AdminLayout = () => {
           boxShadow: '0 2px 30px rgba(0,0,0,0.3)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="admin-mobile-show"
+              style={{
+                background: 'rgba(197,160,89,0.1)',
+                border: '1px solid rgba(197,160,89,0.2)',
+                borderRadius: '8px',
+                padding: '0.5rem',
+                color: '#c5a059',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginRight: '0.5rem'
+              }}
+            >
+              <List size={20} />
+            </button>
             <div style={{
               width: 3,
               height: 24,
               background: 'linear-gradient(180deg,#c5a059,transparent)',
               borderRadius: 2
-            }} />
+            }} className="admin-mobile-hide" />
             <h1 style={{
               margin: 0,
-              fontSize: '1.2rem',
+              fontSize: 'clamp(1rem, 4vw, 1.2rem)',
               fontWeight: 700,
               background: 'linear-gradient(90deg,#fff 60%,#c5a059)',
               WebkitBackgroundClip: 'text',
@@ -454,6 +513,7 @@ const AdminLayout = () => {
               href="/"
               target="_blank"
               rel="noopener noreferrer"
+              className="admin-mobile-hide"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -489,7 +549,7 @@ const AdminLayout = () => {
 
         {/* Content */}
         <div style={{
-          padding: '2rem',
+          padding: 'clamp(1rem, 5vw, 2rem)',
           flex: 1
         }}>
           <Outlet />
@@ -500,6 +560,19 @@ const AdminLayout = () => {
         @keyframes pulse-dot {
           0%, 100% { opacity: 1; transform: scale(1); }
           50%       { opacity: 0.5; transform: scale(0.75); }
+        }
+
+        @media (max-width: 1024px) {
+          #admin-sidebar {
+            position: fixed !important;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            transform: translateX(-100%);
+          }
+          #admin-sidebar.mobile-open {
+            transform: translateX(0);
+          }
         }
       `}</style>
     </div>

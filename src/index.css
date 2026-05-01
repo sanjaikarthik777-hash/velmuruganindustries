@@ -367,6 +367,38 @@ option { background-color: #1a1a1f !important; color: #fff !important; padding: 
 .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--accent-orange) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 @keyframes pulse-gold { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
+/* Admin Panel Responsive Utilities */
+.admin-mobile-hide {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .admin-mobile-hide {
+    display: none !important;
+  }
+}
+
+.admin-mobile-show {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .admin-mobile-show {
+    display: block !important;
+  }
+}
+
+.responsive-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+
+.responsive-table-container table {
+  min-width: 600px;
+}
+
 /* Lenis Smooth Scroll Utilities */
 html.lenis, html.lenis body {
   height: auto;

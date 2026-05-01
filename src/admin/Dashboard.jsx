@@ -237,8 +237,12 @@ const Dashboard = () => {
         {stats.map(s => <StatCard key={s.label} {...s} />)}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '1.5rem' }}>
-        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: '1.5rem' }}>
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+        gap: '1.5rem' 
+      }}>
+        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: '1.5rem', minHeight: '350px' }}>
           <div style={{ marginBottom: '1.5rem', color: '#94a3b8', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase' }}>Visitor Traffic (7 Days)</div>
           <div style={{ width: '100%', height: 250 }}>
             <ResponsiveContainer>
@@ -264,19 +268,21 @@ const Dashboard = () => {
             <Activity size={16} color="#c5a059" />
             <span style={{ color: '#94a3b8', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase' }}>Recent Leads</span>
           </div>
-          {recentLeads.map((l, i) => (
+          {recentLeads.length > 0 ? recentLeads.map((l, i) => (
             <div key={i} style={{ padding: '0.8rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
               <div style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>{l.name}</div>
               <div style={{ color: '#64748b', fontSize: '0.75rem' }}>{l.gateType} • {l.material}</div>
               <div style={{ color: '#c5a059', fontSize: '0.7rem', marginTop: 4 }}>{l.timestamp?.toDate().toLocaleDateString()}</div>
             </div>
-          ))}
+          )) : (
+            <div style={{ color: '#475569', fontSize: '0.8rem', padding: '1rem 0' }}>No recent leads</div>
+          )}
         </div>
       </div>
 
       <div>
         <div style={{ color: '#94a3b8', fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '1rem' }}>Quick Actions</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem' }}>
           {actions.map(a => <ActionCard key={a.title} {...a} />)}
         </div>
       </div>

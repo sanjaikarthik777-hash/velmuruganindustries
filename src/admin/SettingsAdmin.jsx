@@ -123,7 +123,7 @@ const SettingsAdmin = () => {
 
         <div style={styles.section}>
           <h3 style={styles.sectionTitle}>AI Pricing Formulas (per SQFT)</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
             <div style={styles.inputGroup}><label style={styles.label}>MS Rate</label><input type="number" value={pricing.MS} onChange={e => setPricing({...pricing, MS: e.target.value})} style={styles.input} /></div>
             <div style={styles.inputGroup}><label style={styles.label}>SS Rate</label><input type="number" value={pricing.SS} onChange={e => setPricing({...pricing, SS: e.target.value})} style={styles.input} /></div>
             <div style={styles.inputGroup}><label style={styles.label}>Aluminium Rate</label><input type="number" value={pricing.Aluminium} onChange={e => setPricing({...pricing, Aluminium: e.target.value})} style={styles.input} /></div>

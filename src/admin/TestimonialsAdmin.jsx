@@ -96,7 +96,14 @@ const TestimonialsAdmin = () => {
 
   return (
     <div>
-      <div style={styles.header}>
+      <div style={{
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        marginBottom: '2rem',
+        flexWrap: 'wrap',
+        gap: '1rem'
+      }}>
         <h2 style={styles.title}>Manage Testimonials</h2>
         <button onClick={() => openModal()} style={styles.addBtn}>
           <Plus size={20} /> Add Testimonial
@@ -132,8 +139,8 @@ const TestimonialsAdmin = () => {
             </div>
             
             <form onSubmit={handleSubmit} style={styles.form}>
-              <div style={{display: 'flex', gap: '1rem'}}>
-                <div style={{...styles.inputGroup, flex: 1}}>
+              <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem'}}>
+                <div style={styles.inputGroup}>
                   <label style={styles.label}>Customer Name</label>
                   <input 
                     type="text" 
@@ -143,7 +150,7 @@ const TestimonialsAdmin = () => {
                     required
                   />
                 </div>
-                <div style={{...styles.inputGroup, flex: 1}}>
+                <div style={styles.inputGroup}>
                   <label style={styles.label}>Role / Location</label>
                   <input 
                     type="text" 
@@ -155,8 +162,8 @@ const TestimonialsAdmin = () => {
                 </div>
               </div>
 
-              <div style={{display: 'flex', gap: '1rem'}}>
-                <div style={{...styles.inputGroup, flex: 1}}>
+              <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem'}}>
+                <div style={styles.inputGroup}>
                   <label style={styles.label}>Rating (1-5)</label>
                   <input 
                     type="number" 
@@ -166,7 +173,7 @@ const TestimonialsAdmin = () => {
                     style={styles.input}
                   />
                 </div>
-                <div style={{...styles.inputGroup, flex: 1}}>
+                <div style={styles.inputGroup}>
                   <label style={styles.label}>Date</label>
                   <input 
                     type="date" 

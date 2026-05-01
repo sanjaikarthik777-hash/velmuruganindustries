@@ -64,7 +64,13 @@ const LeadsAdmin = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '1rem'
+      }}>
         <h2 style={{ color: '#fff', margin: 0 }}>Lead Management</h2>
         <button onClick={exportCSV} style={styles.exportBtn}>
           <Download size={18} /> Export CSV
@@ -84,7 +90,7 @@ const LeadsAdmin = () => {
         </div>
       </div>
 
-      <div style={styles.tableContainer}>
+      <div className="responsive-table-container" style={styles.tableContainer}>
         <table style={styles.table}>
           <thead>
             <tr>

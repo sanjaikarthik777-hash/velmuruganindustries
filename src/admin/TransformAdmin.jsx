@@ -181,11 +181,23 @@ const styles = {
   title: { color: '#fff', fontSize: '1.8rem', marginBottom: '0.5rem' },
   subtitle: { color: '#94a3b8', fontSize: '0.95rem' },
   form: { display: 'flex', flexDirection: 'column', gap: '2rem' },
-  inputSection: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' },
+  inputSection: { 
+    display: 'grid', 
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+    gap: '1.5rem', 
+    background: 'rgba(255,255,255,0.02)', 
+    padding: '1.5rem', 
+    borderRadius: '12px', 
+    border: '1px solid rgba(255,255,255,0.05)' 
+  },
   inputGroup: { display: 'flex', flexDirection: 'column', gap: '0.6rem' },
   label: { color: '#c5a059', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' },
   input: { padding: '0.8rem 1rem', borderRadius: '8px', background: '#12121a', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', outline: 'none' },
-  grid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' },
+  grid: { 
+    display: 'grid', 
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+    gap: '2rem' 
+  },
   card: { background: '#1a1a24', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' },
   cardTitle: { color: '#fff', fontSize: '1.1rem', fontWeight: 600 },
   uploadArea: { position: 'relative', height: '300px', background: '#0a0a0f', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', border: '1px dashed rgba(197,160,89,0.3)' },

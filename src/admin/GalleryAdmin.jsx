@@ -98,7 +98,14 @@ const GalleryAdmin = () => {
 
   return (
     <div>
-      <div style={styles.header}>
+      <div style={{
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        marginBottom: '2rem',
+        flexWrap: 'wrap',
+        gap: '1rem'
+      }}>
         <h2 style={styles.title}>Manage Gallery</h2>
         <button onClick={openModal} style={styles.addBtn}><Plus size={20} /> Upload Image(s)</button>
       </div>
